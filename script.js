@@ -51,6 +51,7 @@ function handleClick(e) {
   }
   currentTurn = currentTurnBool ? CIRCLE_CLASS : X_CLASS;
   markCell(cell, currentTurn);
+
   result(checkForWin());
 
   swapTurns();
