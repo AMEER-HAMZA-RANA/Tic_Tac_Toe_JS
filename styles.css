@@ -1,0 +1,130 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+body {
+    margin:0;
+    overflow: hidden;
+}
+
+.board {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    background-color: black;
+    color: white;
+    align-content: center;
+    justify-content: center;
+    grid-template-columns: repeat(3,100px);
+    justify-items: center;
+    align-items: center;
+} 
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: black;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+    border-top: none;
+}
+
+.cell:nth-child(3n+1) {
+    border-left: none;
+}
+
+.cell:nth-child(3n+3) {
+    border-right: none;
+}
+
+.cell:last-child,
+.cell:nth-child(7),
+.cell:nth-child(8) {
+    border-bottom: none;
+}
+
+.cell.x::before, .cell.x::after,.board.x .cell:not(.x):not(.o):hover::after, .board.x .cell:not(.x):not(.o):hover::before {
+    content: '';
+    width: 15px;
+    height: 90px;
+    background-color: white;
+    position: absolute;
+}
+
+.cell.x::before, .board.x .cell:not(.x):not(.o):hover::before {
+    rotate: -45deg;
+}
+
+.cell.x::after, .board.x .cell:not(.x):not(.o):hover::after {
+    rotate: 45deg;
+}
+
+.cell.o::before, .cell.o::after, .board.o .cell:not(.x):not(.o):hover::after,.board.o .cell:not(.x):not(.o):hover::before {
+    content: '';
+    width: 90px;
+    height: 90px;
+    background-color: white;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.cell.o::after, .board.o .cell:not(.x):not(.o):hover::after {
+    background: #000;
+    width: 60px;
+    height: 60px;
+}
+
+.cell.x:hover, .cell.o:hover {
+    cursor: not-allowed;
+}
+
+.board.x .cell:not(.x):not(.o):hover::after, .board.x .cell:not(.x):not(.o):hover::before, .board.o .cell:not(.x):not(.o):hover::before {
+    background-color: #4a4949;
+    /* opacity: 50%; */
+}
+
+.winning-message {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-color: black;
+    inset:  0 0 0 0;
+    opacity: 90%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-direction: column;
+    gap:5px;
+}
+
+.winning-message.show {
+    display: flex;
+}
+
+[data-winning-message-text] {
+    font-size: 3em;
+}
+
+#restartButton {
+    font-size: 1.5rem;
+    padding: .5rem 1rem;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+#restartButton:hover {
+    color: white;
+    background-color: #000;
+    border-color: white;
+    cursor: pointer;
+}
