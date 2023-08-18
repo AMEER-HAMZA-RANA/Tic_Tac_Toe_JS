@@ -79,16 +79,6 @@ function checkForWin() {
         : cellElements[cell].classList.contains(CIRCLE_CLASS)
     )
   );
-
-  // return WIN_COMBINATIONS.some(Line => {
-  //     return Line.every(cell => {
-  //         if(currentTurn == 'x') {
-  //             return cellElements[cell].classList.contains('x')
-  //         } else if(currentTurn == 'o') {
-  //             return cellElements[cell].classList.contains('o')
-  //         }
-  //     })
-  // })
 }
 
 function result(checkForWin) {
