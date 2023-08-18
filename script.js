@@ -3,22 +3,26 @@ const winningModal = document.querySelector("#winningMessage");
 const decisionText = document.querySelector("[data-winning-message-text]");
 const restartBtn = document.querySelector("#restartButton");
 const board = document.querySelector("#board");
+
 let currentTurnBool;
+let currentTurn;
+
+const X_CLASS = "x";
+const CIRCLE_CLASS = "o";
 
 function restartGame() {
-  board.classList.remove("x");
-  board.classList.remove("o");
-  board.classList.add("x");
+  board.classList.remove(X_CLASS);
+  board.classList.remove(CIRCLE_CLASS);
+  board.classList.add(X_CLASS);
+
   cellElements.forEach((cell) => {
     cell.addEventListener("click", handleClick, { once: true });
   });
+
   decisionText.innerText = "";
   winningModal.classList.remove("show");
 
-  cellElements.forEach((cell) => {
-    cell.classList.remove("x");
-    cell.classList.remove("o");
-  });
+  resetCells();
 
   currentTurnBool = false;
 }
@@ -36,16 +40,12 @@ const WIN_COMBINATIONS = [
   [2, 4, 6],
 ];
 
-const X_CLASS = "x";
-const CIRCLE_CLASS = "o";
-
-let currentTurn;
 function handleClick(e) {
   const cell = e.target;
-  board.classList.remove("x");
-  board.classList.remove("o");
+  board.classList.remove(X_CLASS);
+  board.classList.remove(CIRCLE_CLASS);
   if (!currentTurnBool) {
-    board.classList.add("o");
+    board.classList.add(CIRCLE_CLASS);
   } else {
     board.classList.add(currentTurn);
   }
@@ -62,6 +62,13 @@ function markCell(cell, currentTurn) {
 
 function swapTurns() {
   currentTurnBool = !currentTurnBool;
+}
+
+function resetCells() {
+  cellElements.forEach((cell) => {
+    cell.classList.remove(X_CLASS);
+    cell.classList.remove(CIRCLE_CLASS);
+  });
 }
 
 function checkForWin() {
